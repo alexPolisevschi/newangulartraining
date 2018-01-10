@@ -4,5 +4,7 @@ export const environment = {
   oauthClientId: 'springTraining',
   oauthClientSecret: 'mostSecretClient',
   rootPath: 'http://localhost:7799/',
-  oauthTokenPath: 'oauth/token'
+  oauthTokenPath: 'oauth/token',
+
+  pageSize: 3
 };
