@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import {RestService} from '../../services/rest.service';
+import {Component, OnInit} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+
 import {Resource} from '../../domain/resource';
 import {User} from '../../domain/user';
 
-import { environment } from '../../../environments/environment';
+import {UserEditorComponent} from '../user-editor/user-editor.component';
+import {RestService} from '../../services/rest.service';
+
+import {environment} from '../../../environments/environment';
+
 
 @Component({
   selector: 'app-user-list',
@@ -12,7 +19,9 @@ import { environment } from '../../../environments/environment';
 })
 export class UserListComponent implements OnInit {
 
-  constructor(private _rest: RestService) { }
+  constructor(private _rest: RestService, private _modalSv: NgbModal) { }
+
+  changes: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   userList: Resource<User>;
   page = 0;
@@ -20,10 +29,17 @@ export class UserListComponent implements OnInit {
   sortCol = 'name';
   sortDir = true;
   selectedId: number;
+  hoverId: number;
 
 
   ngOnInit() {
     this.load();
+
+    this.changes.subscribe(u => {
+      if (u !== null) {
+        this.load();
+      }
+    });
   }
 
   private load() {
@@ -51,6 +67,17 @@ export class UserListComponent implements OnInit {
 
   deleteById(id: number): void {
     this._rest.delete('api/user/' + id).subscribe(re => this.load());
+  }
+
+  edit(u: User): void {
+    const modalRef = this._modalSv.open(UserEditorComponent);
+    modalRef.componentInstance.user = u;
+    modalRef.componentInstance.callback = this.changes;
+  }
+
+  createNew(): void {
+    const u: User = new User();
+    this.edit(u);
   }
 
 }

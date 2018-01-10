@@ -15,15 +15,26 @@
       <i *ngIf="sortCol==='status'" class="fa" [class.fa-sort-asc]="sortDir" [class.fa-sort-desc]="!sortDir"></i>Status</th>
     <th scope="col" (click)="sort('role')">
       <i *ngIf="sortCol==='role'" class="fa" [class.fa-sort-asc]="sortDir" [class.fa-sort-desc]="!sortDir"></i>Role</th>
+    <th scope="col">Actions</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let u of userList?.content" [class.table-active]="u.id===selectedId" (click)="selectedId=u.id">
+  <tr *ngFor="let u of userList?.content" [class.table-active]="u.id===selectedId"
+      (click)="selectedId=u.id"
+      (dblclick)='edit(u)'
+      (mouseenter)="hoverId=u.id"
+      (mouseleave)="hoverId=undefined">
     <td>{{u.username}}</td>
     <td>{{u.name}}</td>
     <td>{{u.status}}</td>
     <td>{{u.role}}</td>
-    <td><button class="btn btn-danger btn-sm ml-2 mb-3" (click)="deleteById(u.id)">Delete</button></td>
+    <td>
+      <button *ngIf="hoverId===u.id" class="btn btn-info btn-sm ml-2" (click)="edit(u)" ><i class="fa fa-pencil"></i></button>
+      <button *ngIf="hoverId===u.id" class="btn btn-danger btn-sm ml-2" (click)="deleteById(u.id)"><i class="fa fa-trash"></i></button>
+    </td>
   </tr>
+  <div></div>
+  <button class="btn btn-success btn-sm ml-2 mb-3" (click)="createNew()">New</button>
+  <!-- <button class="btn btn-danger btn-sm ml-2 mb-3" [disabled]="selectedId===undefined" (click)="deleteSelected()">Delete</button> -->
   </tbody>
 </table>

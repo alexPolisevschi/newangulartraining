@@ -11,5 +11,5 @@ export const environment = {
   rootPath: 'http://localhost:7799/',
   oauthTokenPath: 'oauth/token',
 
-  pageSize: 3
+  pageSize: 5
 };
