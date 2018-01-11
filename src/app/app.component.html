@@ -10,6 +10,9 @@
       <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <a routerLink="/" class="nav-link" >Home</a>
       </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a routerLink="/dumi" class="nav-link" >Dumi</a>
+      </li>
       <li class="nav-item"  routerLinkActive="active" *ngIf="(authSvc.authenticated|async)">
         <a routerLink="/users" class="nav-link">Users</a>
       </li>

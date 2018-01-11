@@ -6,6 +6,7 @@ import {ArticleListComponent} from './components/article-list/article-list.compo
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {UserListComponent} from './components/user-list/user-list.component';
 import {AuthService} from './services/auth.service';
+import {DumiComponent} from './components/dumi/dumi.component';
 
 
 @NgModule({
@@ -29,6 +30,10 @@ import {AuthService} from './services/auth.service';
         {
           path: '',
           component: HomeComponent
+        },
+        {
+          path: 'dumi',
+          component: DumiComponent
         },
         {
           path: '**',
