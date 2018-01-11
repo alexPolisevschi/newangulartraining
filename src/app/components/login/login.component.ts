@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {User} from '../../domain/user';
 import {RestService} from '../../services/rest.service';
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-login',
@@ -16,8 +17,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.authSvc.authenticated
-        .subscribe(token => this._rest.getOne<User>('api/user/me', true)
-        .subscribe(u => this.user = u));
+        .subscribe(isAuth => {
+          if (isAuth) {
+            this._rest.getOne<User>('api/user/me', true).subscribe(u => this.user = u);
+          } else {
+            Observable.of(null);
+          }
+        });
   }
 
 

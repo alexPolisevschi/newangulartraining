@@ -11,15 +11,16 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 
 import { environment } from '../../environments/environment';
+import {ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot} from '@angular/router';
 
 
 @Injectable()
-export class AuthService {
+export class AuthService implements CanActivate, CanLoad {
 
   public authenticated: BehaviorSubject<boolean> = new BehaviorSubject(this._cookie.check('auth'));
 
   constructor(
-    private _http: HttpClient, private _cookie: CookieService) {
+    private _http: HttpClient, private _cookie: CookieService, private _router: Router) {
   }
 
 
@@ -45,8 +46,21 @@ export class AuthService {
     this._cookie.delete('auth');
     this._cookie.delete('refresh');
     this.authenticated.next(false);
+    this._router.navigate(['/']);
   }
 
+
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
+    return this.checkCredentials().map(token => {
+      return token != null;
+    });
+  }
+
+  public canLoad(route: Route): Observable<boolean>|Promise<boolean>|boolean {
+    return this.checkCredentials().map(token => {
+      return token != null;
+    });
+  }
 
   public checkCredentials(): Observable<string> {
     if (this.getAuth()) {

@@ -26,7 +26,7 @@ export class UserListComponent implements OnInit {
   userList: Resource<User>;
   page = 0;
   searchTerm = '';
-  sortCol = 'name';
+  sortCol = 'fullName';
   sortDir = true;
   selectedId: number;
   hoverId: number;

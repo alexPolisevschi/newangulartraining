@@ -9,13 +9,13 @@
   <tr>
     <th scope="col" (click)="sort('username')">
       <i *ngIf="sortCol==='username'" class="fa" [class.fa-sort-asc]="sortDir" [class.fa-sort-desc]="!sortDir"></i>Username</th>
-    <th scope="col" (click)="sort('name')">
-      <i *ngIf="sortCol==='name'" class="fa" [class.fa-sort-asc]="sortDir" [class.fa-sort-desc]="!sortDir"></i>Full name</th>
+    <th scope="col" (click)="sort('fullName')">
+      <i *ngIf="sortCol==='fullName'" class="fa" [class.fa-sort-asc]="sortDir" [class.fa-sort-desc]="!sortDir"></i>Full name</th>
     <th scope="col" (click)="sort('status')">
       <i *ngIf="sortCol==='status'" class="fa" [class.fa-sort-asc]="sortDir" [class.fa-sort-desc]="!sortDir"></i>Status</th>
     <th scope="col" (click)="sort('role')">
       <i *ngIf="sortCol==='role'" class="fa" [class.fa-sort-asc]="sortDir" [class.fa-sort-desc]="!sortDir"></i>Role</th>
-    <th scope="col">Actions</th>
+    <th scope="col" class="w-25">Actions</th>
   </tr>
   </thead>
   <tbody>
