@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 export class Item {
   id: number;
   description: string;
+  selected?: boolean;
 }
 
 @Injectable()

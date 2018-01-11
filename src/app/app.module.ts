@@ -17,8 +17,9 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {CookieService} from 'ngx-cookie-service';
 import {AuthService} from './services/auth.service';
 import {RestService} from './services/rest.service';
-import { DumiComponent } from './components/dumi/dumi.component';
-import { DumiBoxComponent } from './components/dumi-box/dumi-box.component';
+import {DumiComponent} from './components/dumi/dumi.component';
+import {DumiBoxComponent} from './components/dumi-box/dumi-box.component';
+import {ElementsService} from './services/elements.service';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { DumiBoxComponent } from './components/dumi-box/dumi-box.component';
   providers: [
     CookieService,
     AuthService,
-    RestService
+    RestService,
+    ElementsService
   ],
   entryComponents: [
     UserEditorComponent,

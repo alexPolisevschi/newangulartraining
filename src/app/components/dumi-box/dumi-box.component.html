@@ -1,3 +1,35 @@
-<p>
-  dumi-box works!
-</p>
+<div class="card">
+  <div class="container card-body">
+      <div class="row">
+        <div class="col-6 input-group" (click)="popForm($event)" #p="ngbPopover" [ngbPopover]="popContent" triggers="manual" placement="bottom">
+            <input type="text" class="form-control" [value]="selectedNumber + ' element(s) selected'">
+            <div class="input-group-append">
+              <i class="input-group-text fa fa-arrow-down"></i>
+            </div>
+        </div>
+        <div class="col-6 choice-items">
+          <ul>
+            <li *ngFor="let i of itemChanges | async">{{i.description}}</li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #popContent>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <i class="input-group-text fa fa-search"></i>
+    </div>
+    <input class="form-control">
+  </div>
+  <div class="choice-items">
+    <div class="form-check" *ngFor="let i of items">
+      <input class="form-check-input" type="checkbox" value="" [attr.id]="'checkbox_' + i.id" (change) = "onItemChange(i.id, $event)">
+      <label class="form-check-label" [attr.for]="'checkbox_' + i.id">
+        {{i.description}}
+      </label>
+    </div>
+  </div>
+</ng-template>
