@@ -1,3 +1,16 @@
-<p>
-  home works!
-</p>
+<nav class="form-inline">
+  <ngb-pagination size="sm" class="align-middle mr-2" [collectionSize]="articleList?.totalElements" [(page)]="page" [pageSize]="articleList?.size"
+                  (pageChange)="load()"></ngb-pagination>
+  <input class="form-control form-control-sm align-middle mb-3" type="search" placeholder="Search" [(ngModel)]="searchTerm"
+         (keyup)="load()" />
+</nav>
+  <div class="w-75 mx-auto">
+    <div class="card border-primary mb-3" style="" *ngFor="let article of articleList?.content" [class.table-active]="article.id===selectedId">
+      <div class="card-body">
+        <h5 class="card-title">{{article.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{article.publishDate | date:'dd/MM/yyyy'}}</h6>
+        <p class="card-text">{{article.text}}</p>
+        <p class="cart-text" align="right">by {{article.author.name}}</p>
+      </div>
+    </div>
+  </div>

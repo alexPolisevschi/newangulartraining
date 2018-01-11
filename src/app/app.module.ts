@@ -11,6 +11,7 @@ import {HomeComponent} from './components/home/home.component';
 import {ArticleListComponent} from './components/article-list/article-list.component';
 import {UserListComponent} from './components/user-list/user-list.component';
 import {UserEditorComponent} from './components/user-editor/user-editor.component';
+import {ArticleEditorComponent} from './components/article-editor/article-editor.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 
 import {CookieService} from 'ngx-cookie-service';
@@ -26,7 +27,8 @@ import {RestService} from './services/rest.service';
     ArticleListComponent,
     UserListComponent,
     NotFoundComponent,
-    UserEditorComponent
+    UserEditorComponent,
+    ArticleEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import {RestService} from './services/rest.service';
     RestService
   ],
   entryComponents: [
-    UserEditorComponent
+    UserEditorComponent,
+    ArticleEditorComponent
   ],
   bootstrap: [AppComponent]
 })

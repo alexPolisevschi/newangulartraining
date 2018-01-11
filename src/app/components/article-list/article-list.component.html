@@ -1,3 +1,42 @@
-<p>
-  article-list works!
-</p>
+<nav class="form-inline">
+  <ngb-pagination size="sm" class="align-middle mr-2" [collectionSize]="articleList?.totalElements" [(page)]="page" [pageSize]="articleList?.size"
+                  (pageChange)="load()"></ngb-pagination>
+  <input class="form-control form-control-sm align-middle mb-3" type="search" placeholder="Search" [(ngModel)]="searchTerm"
+         (keyup)="load()" />
+</nav>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col" (click)="sort('articleType')">
+      <i *ngIf="sortCol==='articleType'" class="fa" [class.fa-sort-asc]="sortDir" [class.fa-sort-desc]="!sortDir"></i>Article Type</th>
+    <th scope="col" (click)="sort('author')">
+      <i *ngIf="sortCol==='author'" class="fa" [class.fa-sort-asc]="sortDir" [class.fa-sort-desc]="!sortDir"></i>Author</th>
+    <th scope="col" (click)="sort('publishDate')">
+      <i *ngIf="sortCol==='publishDate'" class="fa" [class.fa-sort-asc]="sortDir" [class.fa-sort-desc]="!sortDir"></i>Publish Date</th>
+    <th scope="col" (click)="sort('title')">
+      <i *ngIf="sortCol==='title'" class="fa" [class.fa-sort-asc]="sortDir" [class.fa-sort-desc]="!sortDir"></i>Title</th>
+    <th scope="col" (click)="sort('text')">
+      <i *ngIf="sortCol==='text'" class="fa" [class.fa-sort-asc]="sortDir" [class.fa-sort-desc]="!sortDir"></i>Text</th>
+    <th scope="col" class="w-25">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let article of articleList?.content" [class.table-active]="article.id===selectedId"
+      (click)="selectedId=article.id"
+      (dblclick)='edit(article)'
+      (mouseenter)="hoverId=article.id"
+      (mouseleave)="hoverId=undefined">
+    <td>{{article.articleType}}</td>
+    <td>{{article.author.fullName}}</td>
+    <td>{{article.publishDate | date:'dd/MM/yyyy'}}</td>
+    <td>{{article.title}}</td>
+    <td>{{article.text}}</td>
+    <td>
+      <button *ngIf="hoverId===article.id" class="btn btn-info btn-sm ml-2" (click)="edit(article)" ><i class="fa fa-pencil"></i></button>
+      <button *ngIf="hoverId===article.id" class="btn btn-danger btn-sm ml-2" (click)="deleteById(article.id)"><i class="fa fa-trash"></i></button>
+    </td>
+  </tr>
+  <div></div>
+  <button class="btn btn-success btn-sm ml-2 mb-3" (click)="createNew()">New</button>
+  </tbody>
+</table>
